@@ -3,6 +3,32 @@ on: push
 jobs:
   Linting:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3 
+      - name: Setup environment
+        uses: actions/setup-node@v4 
       - name: Run Linting Rules
-        run: echo "Hello CI!"
+        run: npm run lint
+  Testing:
+    needs: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Setup environment
+        uses: actions/setup-node@v4 
+      - name: Run Linting Rules
+        run: npm run test
+  Building:
+    needs: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Setup environment
+        uses: actions/setup-node@v4 
+      - name: Run Linting Rules
+        run: npm run build
+
+   
